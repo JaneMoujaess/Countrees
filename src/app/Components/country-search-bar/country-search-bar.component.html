@@ -1,5 +1,11 @@
 <div>
   <label for="country-input">Country</label>
-  <input type="text" id="country-input" placeholder="Search" />
+  <input
+    type="text"
+    id="country-input"
+    placeholder="Search"
+    [(ngModel)]="searchString"
+    (input)="onInput()"
+  />
   <fa-icon [icon]="faMagnifyingGlass"></fa-icon>
 </div>

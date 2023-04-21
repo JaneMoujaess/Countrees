@@ -12,17 +12,19 @@
       </div>
       <div id="details" class="container-col">
         <app-country-info
-          [population]="selectedCountry.population"
-          [spokenLanguages]="selectedCountry.languages"
+          [population]="selectedCountry.population.toLocaleString()"
+          [spokenLanguages]="languages"
         ></app-country-info>
-        <app-gallery></app-gallery>
+        <app-gallery [country]="selectedCountry.name.common"></app-gallery>
       </div>
     </div>
-  </ng-container>
-  <ng-container *ngIf="borderingCountries">
     <div class="bordering-countries-section">
       <h1>Bordering countries</h1>
-      <div class="container-row bordering-countries-list">
+      <p *ngIf="borderingCountries.length == 0">none</p>
+      <div
+        class="container-row bordering-countries-list"
+        *ngIf="borderingCountries.length > 0"
+      >
         <app-country-card
           *ngFor="let borderingCountry of borderingCountries"
           [imageUrl]="borderingCountry.flags.svg"

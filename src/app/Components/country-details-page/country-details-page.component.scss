@@ -18,6 +18,7 @@ app-gallery {
 }
 .bordering-countries-list {
   margin-top: 20px;
+  justify-content: center;
 }
 app-country-card {
   margin: 10px;
@@ -46,6 +47,9 @@ app-country-card {
     justify-content: center;
   }
   h1 {
+    text-align: center;
+  }
+  p {
     text-align: center;
   }
 }

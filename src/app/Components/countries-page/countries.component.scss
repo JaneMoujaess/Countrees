@@ -23,11 +23,30 @@ app-country-search-bar {
   transform: translate(-50%, 50%);
   width: 40%;
 }
-app-filter-button {
+.filter-container {
   position: absolute;
   bottom: 0;
   right: 5%;
+}
+app-filter {
+  position: absolute;
+  right: 5%;
+  top: 100%;
+  transform: translateY(-25px);
+}
+app-filter-button {
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  right: 5%;
   transform: translateY(50%);
+}
+app-filter-tab {
+  z-index: 0;
+  position: absolute;
+  top: 100%;
+  right: 100%;
+  transform: translate(-8%, 5%);
 }
 fa-icon {
   padding-left: 2vw;

@@ -1,0 +1,18 @@
+<fa-icon
+  [icon]="faFilter"
+  (click)="onIconClick()"
+  [ngClass]="{ active: isClicked }"
+></fa-icon>
+<div class="filter-tab" *ngIf="showFilters">
+  <h1>Filter by region</h1>
+  <form [formGroup]="filtersForm" (ngSubmit)="onSubmit()">
+    <div><input type="checkbox" formControlName="Asia" /> Asia</div>
+    <div><input type="checkbox" formControlName="Europe" /> Europe</div>
+    <div><input type="checkbox" formControlName="Africa" /> Africa</div>
+    <div>
+      <input type="checkbox" formControlName="NorthAmerica" /> North America
+    </div>
+    <div><input type="checkbox" formControlName="Oceania" /> Oceania</div>
+    <button type="submit">Apply</button>
+  </form>
+</div>

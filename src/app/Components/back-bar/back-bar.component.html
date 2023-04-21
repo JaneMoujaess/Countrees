@@ -1,4 +1,5 @@
 <div class="container-row">
-  <p><fa-icon [icon]="leftArrow"></fa-icon>Go back</p>
-  <p class="edit">Edit</p>
+  <p><fa-icon [icon]="leftArrow" (click)="onBack()"></fa-icon>Go back</p>
+  <p class="edit" *ngIf="isAdmin && !edit" (click)="onEdit()">Edit</p>
+  <p class="edit" *ngIf="isAdmin && edit" (click)="onDone()">Done</p>
 </div>

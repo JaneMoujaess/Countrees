@@ -1,5 +1,10 @@
 import { Component, Input } from '@angular/core';
-import { CountryService } from 'src/app/Services/CountryService';
+import { ActivatedRoute } from '@angular/router';
+import { Country } from 'src/app/ICountry';
+import { AuthService } from 'src/app/Services/auth-service.service';
+import { CountryService } from 'src/app/Services/country-service.service';
+import jwt_decode from 'jwt-decode';
+import { AdminService } from 'src/app/Services/admin-service.service';
 
 @Component({
   selector: 'app-country-details-page',
@@ -7,26 +12,40 @@ import { CountryService } from 'src/app/Services/CountryService';
   styleUrls: ['./country-details-page.component.scss'],
 })
 export class CountryDetailsPageComponent {
-  @Input() selectedCountryCode: string = '';
+  selectedCountryName: string = '';
+  selectedCountry: any = null;
+  borderingCountries: Country[] = [];
+  languages: string = '';
 
-  selectedCountry: any;
+  constructor(
+    private countryService: CountryService,
+    private authService: AuthService,
+    private adminService: AdminService,
+    private route: ActivatedRoute
+  ) {}
 
-  countries: any;
-  borderingCountries: any;
-
-  constructor(private countryService: CountryService) {}
   ngOnInit() {
-    this.countryService
-      .getCountryByCode(this.selectedCountryCode)
-      .subscribe((data) => {
-        this.selectedCountry = data[0];
-      });
+    const token = this.authService.getAccessToken();
+    const decodedToken: any = jwt_decode(token);
+    this.adminService.isAdmin.next(
+      decodedToken.realm_access.roles.includes('Admin') ? true : false
+    );
 
-    this.countryService
-      .getBorderingCountries(this.selectedCountryCode)
-      .subscribe((data) => {
-        this.borderingCountries = data;
-        console.log(this.borderingCountries);
-      });
+    this.route.params.subscribe((params) => {
+      this.selectedCountryName = params['countryName'];
+      // Call the countryService to fetch the country and bordering countries
+      this.countryService
+        .getCountryByName(this.selectedCountryName)
+        .subscribe((fetchedCountry) => {
+          this.selectedCountry = fetchedCountry;
+          this.languages = Object.values(fetchedCountry.languages).join(', ');
+          this.countryService
+            .getBorderingCountries(fetchedCountry.cca3)
+            .subscribe((fetchedBorderingCountries) => {
+              this.borderingCountries = fetchedBorderingCountries;
+            });
+        });
+    });
+    // console.log(this.selectedCountry.languages);
   }
 }

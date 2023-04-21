@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Router } from '@angular/router';
+import { CountryService } from 'src/app/Services/country-service.service';
 
 @Component({
   selector: 'app-country-card',
@@ -10,11 +12,10 @@ export class CountryCardComponent {
   @Input() continent: string = '';
   @Input() imageUrl: string = '';
 
-  @Output() countrySelected = new EventEmitter<string>();
+  constructor(private router: Router) {}
 
   onClick() {
-    // Emit the selected country code to the parent component
     console.log(this.name);
-    this.countrySelected.emit(this.name);
+    this.router.navigate(['/countries/' + this.name]);
   }
 }

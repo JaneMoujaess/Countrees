@@ -1,25 +1,18 @@
 <div class="container">
-  <h1>Gallery</h1>
+  <div class="gallery-header">
+    <h1>Gallery</h1>
+    <button *ngIf="edit" (click)="fileInput.click()">+</button>
+    <input
+      type="file"
+      style="display: none"
+      #fileInput
+      (change)="onFileSelected($event)"
+      accept="image/*"
+    />
+  </div>
   <carousel>
-    <div class="carousel-cell">
-      <img
-        src="https://images.pexels.com/photos/4617294/pexels-photo-4617294.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-      />
-    </div>
-    <div class="carousel-cell">
-      <img
-        src="https://static.euronews.com/articles/stories/07/03/78/74/1440x810_cmsv2_31e075c9-00c3-595c-a40a-fbbc0af8d492-7037874.jpg"
-      />
-    </div>
-    <div class="carousel-cell">
-      <img
-        src="https://images.pexels.com/photos/4041122/pexels-photo-4041122.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-      />
-    </div>
-    <div class="carousel-cell">
-      <img
-        src="https://images.pexels.com/photos/4041122/pexels-photo-4041122.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-      />
+    <div class="carousel-cell" *ngFor="let photoUrl of photoUrls">
+      <img [src]="photoUrl" />
     </div>
   </carousel>
 </div>

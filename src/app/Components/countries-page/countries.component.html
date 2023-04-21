@@ -1,7 +1,10 @@
 <header>
   <app-navbar></app-navbar>
   <app-country-search-bar></app-country-search-bar>
-  <app-filter-button></app-filter-button>
+  <app-filter
+    [showFilters]="showFilters"
+    (iconClick)="onFilterIconClick()"
+  ></app-filter>
 </header>
 <section id="countries-list">
   <app-country-card
@@ -9,7 +12,6 @@
     [name]="country.name.common"
     [continent]="country.continents[0]"
     [imageUrl]="country.flags.svg"
-    (countrySelected)="onCountrySelected($event)"
   >
   </app-country-card>
 </section>

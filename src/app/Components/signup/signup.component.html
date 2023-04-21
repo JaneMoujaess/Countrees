@@ -1,20 +1,20 @@
 <div class="container">
   <h1>Create new account</h1>
-  <p>Already a member? <a [routerLink]="['/login']">Log in</a></p>
+  <p>Already a member? <a [routerLink]="'/login'">Log in</a></p>
 
-  <form action="">
+  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
     <div class="name">
-      <input type="text" placeholder="First Name" />
-      <input type="text" placeholder="Last Name" />
+      <input type="text" placeholder="First Name" formControlName="firstName" />
+      <input type="text" placeholder="Last Name" formControlName="lastName" />
     </div>
-    <input type="email" placeholder="Email" />
-    <input type="password" placeholder="Password" />
+    <input type="email" placeholder="Email" formControlName="email" />
+    <input type="password" placeholder="Password" formControlName="password" />
     <div class="check-conditions">
-      <input type="checkbox" /> Create Admin account
+      <input type="checkbox" formControlName="admin" /> Create Admin account
     </div>
     <div class="check-conditions">
-      <input type="checkbox" /> I agree to the terms and conditions as set out
-      by the user agreement.
+      <input type="checkbox" formControlName="termsAndConditions" /> I agree to
+      the terms and conditions as set out by the user agreement.
     </div>
     <p>
       By clicking here, I state that I have read and understood the terms and
@@ -23,3 +23,64 @@
     <button type="submit">Sign up</button>
   </form>
 </div>
+<!-- <div class="container">
+  <h1>Create new account</h1>
+  <p>Already a member? <a [routerLink]="'/login'">Log in</a></p>
+
+  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+    <div class="name">
+      <div class="firstname">
+        <span *ngIf="submitted && signupForm.get('firstName')?.invalid">
+          First name is required.
+        </span>
+        <input
+          type="text"
+          placeholder="First Name"
+          formControlName="firstName"
+        />
+      </div>
+      <div class="lastname">
+        <span *ngIf="submitted && signupForm.get('lastName')?.invalid"
+          >Last name is required.
+        </span>
+        <input type="text" placeholder="Last Name" formControlName="lastName" />
+      </div>
+    </div>
+    <span *ngIf="submitted && signupForm.get('email')?.invalid">
+      <p *ngIf="signupForm.get('email')?.hasError('required')">
+        Email is required.
+      </p>
+      <p *ngIf="signupForm.get('email')?.hasError('email')">
+        Please enter a valid email address.
+      </p>
+    </span>
+    <input type="email" placeholder="Email" formControlName="email" />
+    <span *ngIf="submitted && signupForm.get('password')?.invalid">
+      <span *ngIf="signupForm.get('password')?.hasError('required')"
+        >Password is required.</span
+      >
+      <span *ngIf="signupForm.get('password')?.hasError('minlength')"
+        >Password must be at least 8 characters long.</span
+      >
+      <span *ngIf="signupForm.get('password')?.hasError('pattern')"
+        >Password must contain at least one special character.</span
+      >
+    </span>
+    <input type="password" placeholder="Password" formControlName="password" />
+    <div class="check-conditions">
+      <input type="checkbox" formControlName="admin" /> Create Admin account
+    </div>
+    <div class="check-conditions">
+      <span *ngIf="submitted && signupForm.get('termsAndConditions')?.invalid"
+        >You must agree to the terms and conditions.
+      </span>
+      <input type="checkbox" formControlName="termsAndConditions" /> I agree to
+      the terms and conditions as set out by the user agreement.
+    </div>
+    <p>
+      By clicking here, I state that I have read and understood the terms and
+      conditions
+    </p>
+    <button type="submit">Sign up</button>
+  </form>
+</div> -->

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthPageComponent } from './Components/auth-page/auth-page.component';
@@ -10,7 +10,6 @@ import { CountriesComponent } from './Components/countries-page/countries.compon
 import { CountrySearchBarComponent } from './Components/country-search-bar/country-search-bar.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CountryCardComponent } from './Components/country-card/country-card.component';
-import { FilterButtonComponent } from './Components/filter-button/filter-button.component';
 import { NavbarComponent } from './Components/navbar/navbar.component';
 import { CountryDetailsPageComponent } from './Components/country-details-page/country-details-page.component';
 import { BackBarComponent } from './Components/back-bar/back-bar.component';
@@ -18,7 +17,35 @@ import { CountryProfileComponent } from './Components/country-profile/country-pr
 import { CountryInfoComponent } from './Components/country-info/country-info.component';
 import { GalleryComponent } from './Components/gallery/gallery.component';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { FilterComponent } from './Components/filter/filter.component';
+import { JwtInterceptorService } from './Services/jwt-interceptor.service';
+import { Routes } from '@angular/router';
+import { AuthGuard } from './Services/guard-service.guard';
+import { NotFoundComponent } from './Components/not-found/not-found.component';
+
+// const routes: Routes = [
+//   // {
+//   //   path: '',
+//   //   component: AuthPageComponent,
+//   //   children: [
+//   //     {
+//   //       path: 'login',
+//   //       component: LoginComponent,
+//   //     },
+//   //     { path: 'signup', component: SignupComponent },
+//   //   ],
+//   // },
+//   // { path: 'login', component: LoginComponent },
+//   // { path: 'signup', component: SignupComponent },
+//   { path: '', component: CountriesComponent },
+//   {
+//     path: 'countries',
+//     component: CountriesComponent,
+//     canActivate: [AuthGuard],
+//   },
+//   { path: 'countries/:countryName', component: CountryDetailsPageComponent },
+// ];
 
 @NgModule({
   declarations: [
@@ -29,13 +56,14 @@ import { HttpClientModule } from '@angular/common/http';
     CountriesComponent,
     CountrySearchBarComponent,
     CountryCardComponent,
-    FilterButtonComponent,
     NavbarComponent,
     CountryDetailsPageComponent,
     BackBarComponent,
     CountryProfileComponent,
     CountryInfoComponent,
     GalleryComponent,
+    FilterComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,8 +71,16 @@ import { HttpClientModule } from '@angular/common/http';
     FontAwesomeModule,
     IvyCarouselModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptorService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

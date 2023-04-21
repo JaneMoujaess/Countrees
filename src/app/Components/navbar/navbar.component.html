@@ -1,4 +1,29 @@
-<div [ngStyle]="{ backgroundColor: backgroundColor }">
+<!-- <div class="container" [ngStyle]="{ backgroundColor: backgroundColor }">
   <img src="../../../assets/images/logo_white.png" alt="logo" />
-  <h1>Hi, Jane<fa-icon [icon]="faUser"></fa-icon></h1>
+  <div>
+    <h1>
+      Hi, {{ nameOfUser
+      }}<fa-icon
+        [icon]="faUser"
+        (mouseenter)="onMouseEnter()"
+        (mouseleave)="onMouseLeave()"
+        (click)="onClick()"
+      ></fa-icon>
+    </h1>
+    <button *ngIf="showLogout">Logout</button>
+  </div>
+</div> -->
+<div class="container" [ngStyle]="{ backgroundColor: backgroundColor }">
+  <img
+    src="../../../assets/images/logo_white.png"
+    alt="logo"
+    (click)="showLogout = true"
+  />
+  <div (mouseleave)="showLogout = false" (mouseenter)="showLogout = true">
+    <h1>
+      Hi, {{ nameOfUser }}
+      <fa-icon [icon]="faUser"></fa-icon>
+    </h1>
+    <button *ngIf="showLogout" (click)="onLogout()">Logout</button>
+  </div>
 </div>

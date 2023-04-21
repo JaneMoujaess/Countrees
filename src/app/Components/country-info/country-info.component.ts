@@ -1,11 +1,11 @@
-import { Component,Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-country-info',
   templateUrl: './country-info.component.html',
-  styleUrls: ['./country-info.component.scss']
+  styleUrls: ['./country-info.component.scss'],
 })
 export class CountryInfoComponent {
-  @Input() population:string="";
-  @Input() spokenLanguages:string[]=[];
+  @Input() population: string = '';
+  @Input() spokenLanguages: string = '';
 }

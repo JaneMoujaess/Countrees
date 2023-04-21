@@ -8,3 +8,23 @@
   background-size: cover;
   height: 180px;
 }
+.gallery-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+button {
+  padding: 10px;
+  border-radius: 50%;
+  border-width: 0;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  background-color: #3c73cb;
+  color: white;
+  font-size: 20px;
+  line-height: 1;
+}
+button:hover {
+  opacity: 70%;
+}

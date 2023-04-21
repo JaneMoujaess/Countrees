@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
-import { CountryService } from 'src/app/Services/CountryService';
+import { Country } from 'src/app/ICountry';
+import { CountryService } from 'src/app/Services/country-service.service';
 
 @Component({
   selector: 'app-countries',
@@ -9,26 +10,21 @@ import { CountryService } from 'src/app/Services/CountryService';
 })
 export class CountriesComponent {
   faUser = faUser;
-  countries: any;
-  selectedCountryCode: string = '';
+  countries: Country[] = [];
+  showFilters: boolean = false;
+
   constructor(private countryService: CountryService) {}
 
   ngOnInit() {
-    this.countryService.getAllCountries().subscribe((data) => {
+    this.countryService.filters$.subscribe(() => {
+      this.countryService.getFilteredCountries('').subscribe();
+    });
+    this.countryService.countries.subscribe((data) => {
       this.countries = data;
     });
   }
 
-  // public getAllCountries() {
-  //   this.countryService.getAllCountries();
-  // }
-  onCountrySelected($event: string) {
-    // Find the selected country by name and set the selected country code
-    const selectedCountry = this.countries.find(
-      (country: any) => country.name.common === $event
-    );
-    console.log(selectedCountry);
-    this.selectedCountryCode = selectedCountry.cca3;
-    console.log(this.selectedCountryCode);
+  onFilterIconClick() {
+    this.showFilters = !this.showFilters;
   }
 }
