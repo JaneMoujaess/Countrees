@@ -1,0 +1,18 @@
+.container-row {
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  padding: 15px;
+  border-radius: 10px;
+}
+.edit {
+  color: #3c73cb;
+  cursor: pointer;
+}
+fa-icon {
+  padding-right: 10px;
+  cursor: pointer;
+}
+fa-icon:hover {
+  color: #3c73cb;
+}

@@ -1,0 +1,15 @@
+<header>
+  <app-navbar></app-navbar>
+  <app-country-search-bar></app-country-search-bar>
+  <app-filter-button></app-filter-button>
+</header>
+<section id="countries-list">
+  <app-country-card
+    *ngFor="let country of countries"
+    [name]="country.name.common"
+    [continent]="country.continents[0]"
+    [imageUrl]="country.flags.svg"
+    (countrySelected)="onCountrySelected($event)"
+  >
+  </app-country-card>
+</section>

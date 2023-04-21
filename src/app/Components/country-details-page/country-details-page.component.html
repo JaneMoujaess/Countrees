@@ -1,0 +1,35 @@
+<app-navbar [backgroundColor]="'#3c73cb'"></app-navbar>
+<div class="page container-col">
+  <app-back-bar></app-back-bar>
+  <ng-container *ngIf="selectedCountry">
+    <div class="container-row selected-country">
+      <div class="test">
+        <app-country-profile
+          [countryName]="selectedCountry.name.common"
+          [countryFlagUrl]="selectedCountry.flags.svg"
+          [capitalName]="selectedCountry.capital[0]"
+        ></app-country-profile>
+      </div>
+      <div id="details" class="container-col">
+        <app-country-info
+          [population]="selectedCountry.population"
+          [spokenLanguages]="selectedCountry.languages"
+        ></app-country-info>
+        <app-gallery></app-gallery>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="borderingCountries">
+    <div class="bordering-countries-section">
+      <h1>Bordering countries</h1>
+      <div class="container-row bordering-countries-list">
+        <app-country-card
+          *ngFor="let borderingCountry of borderingCountries"
+          [imageUrl]="borderingCountry.flags.svg"
+          [continent]="borderingCountry.continents[0]"
+          [name]="borderingCountry.name.common"
+        ></app-country-card>
+      </div>
+    </div>
+  </ng-container>
+</div>

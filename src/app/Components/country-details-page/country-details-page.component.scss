@@ -1,0 +1,51 @@
+.page {
+  background-color: #f4f4f4;
+  padding: 40px;
+}
+.container-row {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.selected-country * {
+  margin-top: 20px;
+}
+.bordering-countries-section {
+  margin: 50px 0;
+}
+app-gallery {
+  display: flex;
+}
+.bordering-countries-list {
+  margin-top: 20px;
+}
+app-country-card {
+  margin: 10px;
+}
+.selected-country {
+  gap: 20px;
+}
+.test {
+  width: 27%;
+  flex: 1;
+}
+#details {
+  height: 100%;
+  width: 70%;
+}
+@media (max-width: 976px) {
+  app-country-profile {
+    width: 100%;
+    text-align: center;
+  }
+  #details {
+    width: 100%;
+    text-align: center;
+  }
+  .container-row {
+    justify-content: center;
+  }
+  h1 {
+    text-align: center;
+  }
+}

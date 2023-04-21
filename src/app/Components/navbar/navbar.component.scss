@@ -1,0 +1,40 @@
+div {
+  padding: 12px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+img {
+  width: 10vw;
+}
+h1 {
+  font-size: 2vw;
+  font-weight: 300;
+}
+fa-icon {
+  padding-left: 2vw;
+  padding-right: 1vw;
+}
+@media (max-width: 970px) {
+  div {
+    padding: 15px;
+  }
+  h1 {
+    font-size: 2.5vw;
+  }
+  img {
+    width: 15vw;
+  }
+}
+@media (max-width: 512px) {
+  div {
+    padding: 17px;
+  }
+  h1 {
+    font-size: 4vw;
+  }
+  img {
+    width: 20vw;
+  }
+}

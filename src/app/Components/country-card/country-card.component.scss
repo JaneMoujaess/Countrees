@@ -1,0 +1,24 @@
+.card {
+  display: flex;
+  gap: 1em;
+  padding: 20px;
+  height: 120px;
+  width: 330px;
+  background-color: white;
+  border-radius: 10px;
+  align-items: center;
+}
+img {
+  width: 80px;
+  height: 50px;
+  border-radius: 10px;
+}
+h1 {
+  font-size: 1.1em;
+  font-weight: 600;
+  line-height: 1;
+}
+p {
+  font-size: 0.8em;
+  color: grey;
+}

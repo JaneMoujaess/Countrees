@@ -1,0 +1,63 @@
+header {
+  position: relative;
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), transparent),
+    url("../../../assets/images/countries-list.jpg");
+  background-size: cover;
+  height: 25vw;
+}
+.header-details {
+  padding: 20px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+h1 {
+  font-size: 2vw;
+  font-weight: 300;
+}
+app-country-search-bar {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  width: 40%;
+}
+app-filter-button {
+  position: absolute;
+  bottom: 0;
+  right: 5%;
+  transform: translateY(50%);
+}
+fa-icon {
+  padding-left: 2vw;
+  padding-right: 1vw;
+}
+#countries-list {
+  padding: 7vw;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: #f4f4f4;
+  align-items: center;
+}
+app-country-card {
+  margin: 0.8em;
+}
+
+@media (max-width: 970px) {
+  #countries-list {
+    padding: 10vw;
+  }
+  header {
+    height: 40vw;
+  }
+}
+@media (max-width: 512px) {
+  header {
+    height: 50vw;
+  }
+  app-country-search-bar {
+    width: 45%;
+  }
+}

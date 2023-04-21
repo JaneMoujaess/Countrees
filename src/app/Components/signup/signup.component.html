@@ -1,0 +1,25 @@
+<div class="container">
+  <h1>Create new account</h1>
+  <p>Already a member? <a [routerLink]="['/login']">Log in</a></p>
+
+  <form action="">
+    <div class="name">
+      <input type="text" placeholder="First Name" />
+      <input type="text" placeholder="Last Name" />
+    </div>
+    <input type="email" placeholder="Email" />
+    <input type="password" placeholder="Password" />
+    <div class="check-conditions">
+      <input type="checkbox" /> Create Admin account
+    </div>
+    <div class="check-conditions">
+      <input type="checkbox" /> I agree to the terms and conditions as set out
+      by the user agreement.
+    </div>
+    <p>
+      By clicking here, I state that I have read and understood the terms and
+      conditions
+    </p>
+    <button type="submit">Sign up</button>
+  </form>
+</div>
