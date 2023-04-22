@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
 import { AuthService } from 'src/app/Services/auth-service.service';
 import jwt_decode from 'jwt-decode';
+import { jwtHandlerService } from 'src/app/Services/jwt-handler.service';
 
 @Component({
   selector: 'app-navbar',
@@ -14,14 +15,17 @@ export class NavbarComponent {
   nameOfUser: string = '';
   showLogout: boolean = false;
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private jwtHandlerService: jwtHandlerService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {
     this.getNameOfUser();
   }
 
   getNameOfUser() {
-    const token = this.authService.getAccessToken();
+    const token = this.jwtHandlerService.getAccessToken();
     const decodedToken: any = jwt_decode(token);
     console.log(decodedToken);
     this.nameOfUser = decodedToken.given_name;

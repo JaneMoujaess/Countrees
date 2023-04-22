@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/Services/auth-service.service';
 import { CountryService } from 'src/app/Services/country-service.service';
 import jwt_decode from 'jwt-decode';
 import { AdminService } from 'src/app/Services/admin-service.service';
+import { jwtHandlerService } from 'src/app/Services/jwt-handler.service';
 
 @Component({
   selector: 'app-country-details-page',
@@ -19,13 +20,13 @@ export class CountryDetailsPageComponent {
 
   constructor(
     private countryService: CountryService,
-    private authService: AuthService,
     private adminService: AdminService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private jwtHandlerService: jwtHandlerService
   ) {}
 
   ngOnInit() {
-    const token = this.authService.getAccessToken();
+    const token = this.jwtHandlerService.getAccessToken();
     const decodedToken: any = jwt_decode(token);
     this.adminService.isAdmin.next(
       decodedToken.realm_access.roles.includes('Admin') ? true : false
@@ -46,6 +47,5 @@ export class CountryDetailsPageComponent {
             });
         });
     });
-    // console.log(this.selectedCountry.languages);
   }
 }

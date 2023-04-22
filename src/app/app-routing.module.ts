@@ -5,7 +5,7 @@ import { SignupComponent } from './Components/signup/signup.component';
 import { CountriesComponent } from './Components/countries-page/countries.component';
 import { CountryDetailsPageComponent } from './Components/country-details-page/country-details-page.component';
 import { AuthPageComponent } from './Components/auth-page/auth-page.component';
-import { AuthGuard } from './Services/guard-service.guard';
+import { AuthGuard, LoggedInAuthGuard } from './Services/guard-service.guard';
 import { NotFoundComponent } from './Components/not-found/not-found.component';
 
 const routes: Routes = [
@@ -21,8 +21,12 @@ const routes: Routes = [
       {
         path: 'login',
         component: LoginComponent,
+        canActivate: [LoggedInAuthGuard],
       },
-      { path: 'signup', component: SignupComponent },
+      {
+        path: 'signup',
+        component: SignupComponent,
+      },
     ],
   },
   {

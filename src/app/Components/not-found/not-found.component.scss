@@ -1,0 +1,64 @@
+// @import url("https://fonts.googleapis.com/css?family=Nunito+Sans");
+// :root {
+//   --blue: #0e0620;
+//   --white: #fff;
+//   --green: #2ccf6d;
+// }
+html,
+body {
+  height: 100%;
+}
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--blue);
+  font-size: 1em;
+  padding: 4%;
+}
+ul {
+  list-style-type: none;
+  padding-inline-start: 35px;
+}
+svg {
+  width: 500px;
+  visibility: hidden;
+}
+h1 {
+  font-size: 7.5em;
+  margin: 15px 0px;
+  font-weight: bold;
+}
+h2 {
+  font-weight: bold;
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  //   justify-content: start;
+}
+.content {
+  align-self: end;
+}
+button {
+  background-color: #3c73cb;
+  color: white;
+  padding: 5px 15px;
+  border: none;
+  border-radius: 10px;
+  font-size: 20px;
+  margin-top: 40px;
+  cursor: pointer;
+}
+button:hover {
+  opacity: 70%;
+}
+@media screen and (max-width: 768px) {
+  body {
+    display: block;
+  }
+  .container {
+    margin-top: 70px;
+    margin-bottom: 70px;
+  }
+}
