@@ -8,7 +8,7 @@
 </header>
 <section id="countries-list">
   <app-loading *ngIf="isLoading"></app-loading>
-  <div *ngIf="!isLoading">
+  <div *ngIf="!isLoading" class="country-container">
     <app-country-card
       *ngFor="let country of countries"
       [name]="country.name.common"

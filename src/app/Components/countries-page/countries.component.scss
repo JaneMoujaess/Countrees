@@ -53,7 +53,12 @@ fa-icon {
   padding-right: 1vw;
 }
 app-loading {
-  margin-top: 120px;
+  margin-top: 100px;
+  justify-self: center;
+  align-self: center;
+}
+p {
+  margin-top: 100px;
   justify-self: center;
   align-self: center;
 }
@@ -64,6 +69,11 @@ app-loading {
   justify-content: center;
   background-color: #f4f4f4;
   align-items: center;
+}
+.country-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 app-country-card {
   margin: 0.8em;

@@ -33,7 +33,7 @@ import { Component } from '@angular/core';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
 import { Country } from 'src/app/ICountry';
 import { CountryService } from 'src/app/Services/country-service.service';
-import { LoadingService } from 'src/app/Services/loading-service.service';
+import { FetchingHandlerService } from 'src/app/Services/fetching-handler-service.service';
 
 @Component({
   selector: 'app-countries',
@@ -48,7 +48,7 @@ export class CountriesComponent {
 
   constructor(
     private countryService: CountryService,
-    private loadingService: LoadingService
+    private fetchingHandlerService: FetchingHandlerService
   ) {}
 
   ngOnInit() {
@@ -58,7 +58,7 @@ export class CountriesComponent {
     this.countryService.countries.subscribe((data) => {
       this.countries = data;
     });
-    this.loadingService.isLoading.subscribe(
+    this.fetchingHandlerService.isLoading.subscribe(
       (isLoading) => (this.isLoading = isLoading)
     );
   }

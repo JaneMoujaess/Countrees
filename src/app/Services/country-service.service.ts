@@ -8,9 +8,10 @@ import {
   map,
   of,
   combineLatest,
+  catchError,
 } from 'rxjs';
 import { Country } from '../ICountry';
-import { LoadingService } from './loading-service.service';
+import { FetchingHandlerService } from './fetching-handler-service.service';
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +23,7 @@ export class CountryService {
 
   constructor(
     private http: HttpClient,
-    private loadingService: LoadingService
+    private fetchingHandlerService: FetchingHandlerService
   ) {}
 
   activateFilter(continents: string[]) {
@@ -56,22 +57,36 @@ export class CountryService {
   }
 
   getFilteredCountries(searchString: string): Observable<Country[]> {
-    this.loadingService.isLoading.next(true);
+    this.fetchingHandlerService.isLoading.next(true);
     const url = `https://restcountries.com/v3.1/name/${searchString}`;
     if (!searchString) {
-      this.loadingService.isLoading.next(false);
+      this.fetchingHandlerService.isLoading.next(false);
       return this.getAllCountries();
     }
-    return combineLatest([this.filters$, this.http.get<Country[]>(url)]).pipe(
-      map(([filters, searchedCountries]) => {
-        const filteredCountries = this.applyFilters(searchedCountries, filters);
-        return filteredCountries;
-      }),
-      tap((filteredCountries) => {
-        this.countries.next(filteredCountries);
-        this.loadingService.isLoading.next(false);
-      })
-    );
+    return combineLatest([this.filters$, this.http.get<Country[]>(url)])
+      .pipe(
+        catchError((error) => {
+          console.log('not found');
+          if (error.status === 404) {
+            this.fetchingHandlerService.isLoading.next(false);
+          }
+          this.countries.next([]);
+          return of([]);
+        })
+      )
+      .pipe(
+        map(([filters, searchedCountries]) => {
+          const filteredCountries = this.applyFilters(
+            searchedCountries,
+            filters
+          );
+          return filteredCountries;
+        }),
+        tap((filteredCountries) => {
+          this.countries.next(filteredCountries);
+          this.fetchingHandlerService.isLoading.next(false);
+        })
+      );
   }
 
   applyFilters(countries: Country[], filters: string[]): Country[] {

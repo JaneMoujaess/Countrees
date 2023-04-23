@@ -4,6 +4,6 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class LoadingService {
+export class FetchingHandlerService {
   public isLoading = new BehaviorSubject<boolean>(false);
 }
