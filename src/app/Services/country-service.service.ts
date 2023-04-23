@@ -10,6 +10,7 @@ import {
   combineLatest,
 } from 'rxjs';
 import { Country } from '../ICountry';
+import { LoadingService } from './loading-service.service';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +20,10 @@ export class CountryService {
   public filters$ = new BehaviorSubject<string[]>([]);
   public filters: string[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private loadingService: LoadingService
+  ) {}
 
   activateFilter(continents: string[]) {
     this.filters = continents;
@@ -52,8 +56,10 @@ export class CountryService {
   }
 
   getFilteredCountries(searchString: string): Observable<Country[]> {
+    this.loadingService.isLoading.next(true);
     const url = `https://restcountries.com/v3.1/name/${searchString}`;
     if (!searchString) {
+      this.loadingService.isLoading.next(false);
       return this.getAllCountries();
     }
     return combineLatest([this.filters$, this.http.get<Country[]>(url)]).pipe(
@@ -61,7 +67,10 @@ export class CountryService {
         const filteredCountries = this.applyFilters(searchedCountries, filters);
         return filteredCountries;
       }),
-      tap((filteredCountries) => this.countries.next(filteredCountries))
+      tap((filteredCountries) => {
+        this.countries.next(filteredCountries);
+        this.loadingService.isLoading.next(false);
+      })
     );
   }
 

@@ -7,11 +7,14 @@
   ></app-filter>
 </header>
 <section id="countries-list">
-  <app-country-card
-    *ngFor="let country of countries"
-    [name]="country.name.common"
-    [continent]="country.continents[0]"
-    [imageUrl]="country.flags.svg"
-  >
-  </app-country-card>
+  <app-loading *ngIf="isLoading"></app-loading>
+  <div *ngIf="!isLoading">
+    <app-country-card
+      *ngFor="let country of countries"
+      [name]="country.name.common"
+      [continent]="country.continents[0]"
+      [imageUrl]="country.flags.svg"
+    >
+    </app-country-card>
+  </div>
 </section>

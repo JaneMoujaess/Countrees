@@ -23,6 +23,7 @@ import { JwtInterceptorService } from './Services/jwt-interceptor.service';
 import { Routes } from '@angular/router';
 import { AuthGuard } from './Services/guard-service.guard';
 import { NotFoundComponent } from './Components/not-found/not-found.component';
+import { LoadingComponent } from './Components/loading/loading.component';
 
 // const routes: Routes = [
 //   // {
@@ -64,6 +65,7 @@ import { NotFoundComponent } from './Components/not-found/not-found.component';
     GalleryComponent,
     FilterComponent,
     NotFoundComponent,
+    LoadingComponent,
   ],
   imports: [
     BrowserModule,
