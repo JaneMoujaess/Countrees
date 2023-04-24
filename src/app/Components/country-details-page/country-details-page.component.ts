@@ -6,6 +6,7 @@ import { CountryService } from 'src/app/Services/country-service.service';
 import jwt_decode from 'jwt-decode';
 import { AdminService } from 'src/app/Services/admin-service.service';
 import { jwtHandlerService } from 'src/app/Services/jwt-handler.service';
+import { FetchingHandlerService } from 'src/app/Services/fetching-handler-service.service';
 
 @Component({
   selector: 'app-country-details-page',
@@ -17,12 +18,14 @@ export class CountryDetailsPageComponent {
   selectedCountry: any = null;
   borderingCountries: Country[] = [];
   languages: string = '';
+  isLoading: boolean = false;
 
   constructor(
     private countryService: CountryService,
     private adminService: AdminService,
     private route: ActivatedRoute,
-    private jwtHandlerService: jwtHandlerService
+    private jwtHandlerService: jwtHandlerService,
+    private fetchingHandlerService: FetchingHandlerService
   ) {}
 
   ngOnInit() {
@@ -34,7 +37,6 @@ export class CountryDetailsPageComponent {
 
     this.route.params.subscribe((params) => {
       this.selectedCountryName = params['countryName'];
-      // Call the countryService to fetch the country and bordering countries
       this.countryService
         .getCountryByName(this.selectedCountryName)
         .subscribe((fetchedCountry) => {
@@ -47,5 +49,8 @@ export class CountryDetailsPageComponent {
             });
         });
     });
+    this.fetchingHandlerService.isLoading.subscribe(
+      (isLoading) => (this.isLoading = isLoading)
+    );
   }
 }

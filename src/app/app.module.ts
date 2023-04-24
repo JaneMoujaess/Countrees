@@ -20,33 +20,8 @@ import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FilterComponent } from './Components/filter/filter.component';
 import { JwtInterceptorService } from './Services/jwt-interceptor.service';
-import { Routes } from '@angular/router';
-import { AuthGuard } from './Services/guard-service.guard';
 import { NotFoundComponent } from './Components/not-found/not-found.component';
 import { LoadingComponent } from './Components/loading/loading.component';
-
-// const routes: Routes = [
-//   // {
-//   //   path: '',
-//   //   component: AuthPageComponent,
-//   //   children: [
-//   //     {
-//   //       path: 'login',
-//   //       component: LoginComponent,
-//   //     },
-//   //     { path: 'signup', component: SignupComponent },
-//   //   ],
-//   // },
-//   // { path: 'login', component: LoginComponent },
-//   // { path: 'signup', component: SignupComponent },
-//   { path: '', component: CountriesComponent },
-//   {
-//     path: 'countries',
-//     component: CountriesComponent,
-//     canActivate: [AuthGuard],
-//   },
-//   { path: 'countries/:countryName', component: CountryDetailsPageComponent },
-// ];
 
 @NgModule({
   declarations: [

@@ -1,7 +1,8 @@
 <app-navbar [backgroundColor]="'#3c73cb'"></app-navbar>
 <div class="page container-col">
   <app-back-bar></app-back-bar>
-  <ng-container *ngIf="selectedCountry">
+  <app-loading *ngIf="isLoading"></app-loading>
+  <ng-container *ngIf="selectedCountry && !isLoading">
     <div class="container-row selected-country">
       <div class="test">
         <app-country-profile

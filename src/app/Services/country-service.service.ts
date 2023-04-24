@@ -41,11 +41,13 @@ export class CountryService {
   // }
 
   getBorderingCountries(countryCode: string): Observable<Country[]> {
+    this.fetchingHandlerService.isLoading.next(true);
     return this.getCountryByCode(countryCode).pipe(
       switchMap((country: Country) => {
         const borders = country.borders;
         return this.getCountriesByCodes(borders);
-      })
+      }),
+      tap(() => this.fetchingHandlerService.isLoading.next(false))
     );
   }
 
@@ -127,9 +129,11 @@ export class CountryService {
   }
 
   getCountryByName(name: string | null): Observable<Country> {
+    this.fetchingHandlerService.isLoading.next(true);
     const url = `https://restcountries.com/v3.1/name/${name}?fullText=true`;
-    return this.http
-      .get<Country[]>(url)
-      .pipe(map((response: Country[]) => response[0]));
+    return this.http.get<Country[]>(url).pipe(
+      map((response: Country[]) => response[0]),
+      tap(() => this.fetchingHandlerService.isLoading.next(false))
+    );
   }
 }

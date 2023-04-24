@@ -20,6 +20,12 @@ app-gallery {
   margin-top: 20px;
   justify-content: center;
 }
+app-loading {
+  position: relative;
+  justify-self: center;
+  align-self: center;
+  top: 200px;
+}
 app-country-card {
   margin: 10px;
 }
