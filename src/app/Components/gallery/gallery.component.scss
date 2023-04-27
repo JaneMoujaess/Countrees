@@ -28,3 +28,9 @@ button {
 button:hover {
   opacity: 70%;
 }
+@media (max-width: 976px) {
+  h1 {
+    text-align: center;
+    margin: auto;
+  }
+}
