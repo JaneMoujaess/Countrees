@@ -1,10 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, Input, SimpleChanges } from '@angular/core';
 import axios from 'axios';
-import { tap } from 'rxjs';
 import { AdminService } from 'src/app/Services/admin-service.service';
-import { AuthService } from 'src/app/Services/auth-service.service';
-//import jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-gallery',

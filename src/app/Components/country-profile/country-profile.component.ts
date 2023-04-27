@@ -9,11 +9,4 @@ export class CountryProfileComponent {
   @Input() countryName: string = '';
   @Input() countryFlagUrl: string = '';
   @Input() capitalName: string = '';
-
-  constructor() {
-    // this.countryName = 'France';
-    // this.countryFlagUrl =
-    //   'https://upload.wikimedia.org/wikipedia/en/thumb/c/c3/Flag_of_France.svg/1280px-Flag_of_France.svg.png';
-    // this.capitalName = 'Paris';
-  }
 }

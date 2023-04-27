@@ -1,6 +1,5 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { CountryService } from 'src/app/Services/country-service.service';
 
 @Component({
   selector: 'app-country-card',

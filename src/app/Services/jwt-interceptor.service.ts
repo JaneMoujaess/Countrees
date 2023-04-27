@@ -1,14 +1,12 @@
 import { Injectable } from '@angular/core';
 import { AuthService } from './auth-service.service';
 import {
-  HttpEvent,
   HttpHandler,
   HttpInterceptor,
   HttpRequest,
 } from '@angular/common/http';
-import { Observable, catchError, of, switchMap, throwError } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import jwtDecode from 'jwt-decode';
 import { jwtHandlerService } from './jwt-handler.service';
 
 @Injectable()
@@ -18,6 +16,31 @@ export class JwtInterceptorService implements HttpInterceptor {
     private jwtHandlerService: jwtHandlerService,
     private authService: AuthService
   ) {}
+
+  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<any> {
+    // add auth header with jwt if account is logged in
+    if (
+      request.url.includes('/Login()') ||
+      request.url.includes('/RefreshToken()') ||
+      request.url.includes('/CreateAdminUser()') ||
+      request.url.includes('/SignUp()')
+    ) {
+      console.log('should skip');
+      return next.handle(request);
+    }
+
+    if (this.jwtHandlerService.validate())
+      request = request.clone({
+        setHeaders: {
+          Authorization: `Bearer ${this.jwtHandlerService.getAccessToken()}`,
+        },
+      });
+    else {
+      this.router.navigate(['/login']);
+      this.authService.logout();
+    }
+    return next.handle(request);
+  }
 
   // intercept(request: HttpRequest<any>, next: HttpHandler): Observable<any> {
   //   // add auth header with jwt if account is logged in and request is to the api url
@@ -118,29 +141,4 @@ export class JwtInterceptorService implements HttpInterceptor {
   //     });
   //   return next.handle(request);
   // }
-
-  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<any> {
-    // add auth header with jwt if account is logged in
-    if (
-      request.url.includes('/Login()') ||
-      request.url.includes('/RefreshToken()') ||
-      request.url.includes('/CreateAdminUser()') ||
-      request.url.includes('/SignUp()')
-    ) {
-      console.log('should skip');
-      return next.handle(request);
-    }
-
-    if (this.jwtHandlerService.validate())
-      request = request.clone({
-        setHeaders: {
-          Authorization: `Bearer ${this.jwtHandlerService.getAccessToken()}`,
-        },
-      });
-    else {
-      this.router.navigate(['/login']);
-      this.authService.logout();
-    }
-    return next.handle(request);
-  }
 }

@@ -1,7 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Country } from 'src/app/ICountry';
-import { AuthService } from 'src/app/Services/auth-service.service';
 import { CountryService } from 'src/app/Services/country-service.service';
 import jwt_decode from 'jwt-decode';
 import { AdminService } from 'src/app/Services/admin-service.service';

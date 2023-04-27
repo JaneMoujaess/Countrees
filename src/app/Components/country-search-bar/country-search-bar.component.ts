@@ -19,17 +19,4 @@ export class CountrySearchBarComponent {
   onInput() {
     this.countryService.getFilteredCountries(this.searchString).subscribe();
   }
-  // onInput() {
-  //   this.countryService
-  //     .getFilteredCountries(this.searchString)
-  //     .pipe(
-  //       catchError((error) => {
-  //         if (error.status === 404) {
-  //           this.router.navigate(['/**']);
-  //         }
-  //         return of(null);
-  //       })
-  //     )
-  //     .subscribe();
-  // }
 }

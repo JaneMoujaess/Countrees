@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
-import jwt_decode from 'jwt-decode';
 import { AdminService } from 'src/app/Services/admin-service.service';
 import { AuthService } from 'src/app/Services/auth-service.service';
 
@@ -22,11 +21,6 @@ export class BackBarComponent {
   ) {}
 
   ngOnInit() {
-    // const token = this.authService.getAccessToken();
-    // const decodedToken: any = jwt_decode(token);
-    // this.isAdmin = decodedToken.realm_access.roles.includes('Admin')
-    //   ? true
-    //   : false;
     this.adminService.isAdmin.subscribe((admin) => (this.isAdmin = admin));
     this.adminService.edit.subscribe((edit) => (this.edit = edit));
     console.log(this.isAdmin);
