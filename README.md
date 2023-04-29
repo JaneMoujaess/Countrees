@@ -1,27 +1,9 @@
-# Countrees
-
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.4.
-
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+# Countrees Project
+-Fully responsive design.
+-User experience is taken into consideration when it comes to interactions such as hover-effects (pointer cursor, change in colors to let users know something is clickable).
+-Loading incorporated to make pages feel more dynamic.
+-Relevant messages displayed on login and signup in case of invalid fields (wrong username or pass, password doesn't abide by certain constraints, etc.).
+-Authentication handled with access and refresh tokens. If access token expires, refresh token fetches new access and refresh tokens and stores them in localhost. However, if refresh token is expired, then user is redirected to login page. Note: this is triggered either upon trying to navigate to a different page (handled by guard) or when executing an http request, such as filtering the countries for example (handled by interceptor).
+-If logged in, the guard forbids users to access login page until they logout.
+-404 page is displayed in case users try to access an invalid route.
+-All main functionalities implemented: search, filter, admin permission to edit details page and add photos to gallery.
